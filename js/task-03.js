@@ -14,22 +14,11 @@ const images = [
 ];
 
 const gallery = document.querySelector(".gallery");
-function createImageElement(imageInfo) {
-  const listItem = document.createElement("li");
-  listItem.classList.add("gallery-item");
 
-  const image = document.createElement("img");
-  image.src = imageInfo.url;
-  image.alt = imageInfo.alt;
+const imagesArray = function (array) {
+  return (array.map(({ url, alt }) => `<li><img class="image" src="${url}" alt="${alt}"></li>`)).join("");
+};
 
-  listItem.appendChild(image);
-  return listItem;
-}
-
-function createGallery(imagesArray) {
-  const imageElements = imagesArray.map(createImageElement);
-  const galleryHTML = imageElements.map(element => element.outerHTML).join('');
-  gallery.insertAdjacentHTML("beforeend", galleryHTML);
-}
-createGallery(images);
+const items = imagesArray(images);
+gallery.insertAdjacentHTML("beforeend", items);
 
